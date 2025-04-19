@@ -19,7 +19,7 @@ class ApplicationsCubit extends Cubit<ApplicationsState> {
     try {
       firestore.collection("applications").snapshots().listen((data) {
         applications = data.docs
-            .map((e) => StudentApplication.fromJson(e.data()))
+            .map((e) => StudentApplication.fromJson(e.data(), e.id))
             .toList();
 
         emit(SuccessApplicationsState());

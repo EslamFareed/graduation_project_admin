@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:graduation_project_admin/core/utils/app_functions.dart';
 import 'package:graduation_project_admin/screens/login/cubit/login_cubit.dart';
 import 'package:graduation_project_admin/screens/university_applications/cubit/university_applications_cubit.dart';
+import 'package:graduation_project_admin/screens/university_applications/university_application_details_screen.dart';
 
 class UniversityApplicationsScreen extends StatelessWidget {
   const UniversityApplicationsScreen({super.key});
@@ -73,7 +74,13 @@ class UniversityApplicationsScreen extends StatelessWidget {
                             ),
                           ),
                           IconButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              context.goToPage(
+                                UniversityApplicationDetailsScreen(
+                                  item: item,
+                                ),
+                              );
+                            },
                             icon: Icon(
                               Icons.arrow_forward_ios,
                               size: 15,

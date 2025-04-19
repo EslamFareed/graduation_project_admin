@@ -22,6 +22,7 @@ class StudentApplication {
   final String status;
   final DateTime interviewDate;
   final String interviewDesc;
+  final String id;
 
   StudentApplication({
     required this.date,
@@ -42,9 +43,10 @@ class StudentApplication {
     required this.status,
     required this.interviewDate,
     required this.interviewDesc,
+    required this.id,
   });
 
-  factory StudentApplication.fromJson(Map<String, dynamic> json) {
+  factory StudentApplication.fromJson(Map<String, dynamic> json,String id) {
     return StudentApplication(
       date: DateTime.parse(json['date']),
       motherPhone: json['motherPhone'],
@@ -64,6 +66,7 @@ class StudentApplication {
       status: json['status'],
       interviewDesc: json['interviewDesc'],
       interviewDate: DateTime.parse(json['interviewDate']),
+      id: id
     );
   }
 }

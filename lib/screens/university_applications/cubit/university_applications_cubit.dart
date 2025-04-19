@@ -16,7 +16,6 @@ class UniversityApplicationsCubit extends Cubit<UniversityApplicationsState> {
   List<StudentApplication> applications = [];
 
   void getApplications(String id) async {
-    print(id);
     emit(LoadingUniversityApplicationsState());
     try {
       var data = await firestore
@@ -24,8 +23,9 @@ class UniversityApplicationsCubit extends Cubit<UniversityApplicationsState> {
           .where("university.id", isEqualTo: id)
           .get();
 
-      allApplications =
-          data.docs.map((e) => StudentApplication.fromJson(e.data())).toList();
+      allApplications = data.docs
+          .map((e) => StudentApplication.fromJson(e.data(), e.id))
+          .toList();
       applications = allApplications;
 
       emit(SuccessUniversityApplicationsState());
@@ -47,5 +47,33 @@ class UniversityApplicationsCubit extends Cubit<UniversityApplicationsState> {
         .toList();
 
     emit(SuccessUniversityApplicationsState());
+  }
+
+  void accpetOrRejectApplication(bool accpeted, String id) async {
+    emit(LoadingChangeApplicationStatus());
+    try {
+      await firestore
+          .collection("applications")
+          .doc(id)
+          .update({"status": accpeted ? "accepted" : "rejected"});
+      emit(SuccessChangeApplicationStatus());
+    } catch (e) {
+      emit(ErrorChangeApplicationStatus());
+    }
+  }
+
+  void makeInterviewApplication(String id,
+      {required String interviewDesc, required String interviewDate}) async {
+    emit(LoadingChangeApplicationStatus());
+    try {
+      await firestore.collection("applications").doc(id).update({
+        "status": "interview",
+        "interviewDesc": interviewDesc,
+        "interviewDate": interviewDate
+      });
+      emit(SuccessChangeApplicationStatus());
+    } catch (e) {
+      emit(ErrorChangeApplicationStatus());
+    }
   }
 }
