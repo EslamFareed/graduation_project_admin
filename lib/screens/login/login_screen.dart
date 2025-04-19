@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:graduation_project_admin/core/utils/app_functions.dart';
 import 'package:graduation_project_admin/screens/login/cubit/login_cubit.dart';
+import 'package:graduation_project_admin/screens/university_dashboard/university_dashboard_screen.dart';
 
 import '../../core/utils/app_colors.dart';
 import '../dashboard/dashboard_screen.dart';
@@ -100,7 +101,8 @@ class LoginScreen extends StatelessWidget {
                       context.showErrorSnack("Login Error, Please login again");
                     } else if (state is SuccessLoginUniversityState) {
                       context.showSuccessSnack("Login Success");
-                      context.goOffAll(DashboardScreen());
+
+                      context.goOffAll(UniversityDashboardScreen());
                     }
                   },
                   builder: (context, state) {
@@ -135,6 +137,7 @@ class LoginScreen extends StatelessWidget {
                       context.showErrorSnack("Login Error, Please login again");
                     } else if (state is SuccessLoginAdminState) {
                       context.showSuccessSnack("Login Success");
+
                       context.goOffAll(DashboardScreen());
                     }
                   },

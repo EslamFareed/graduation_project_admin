@@ -7,6 +7,7 @@ import 'package:graduation_project_admin/screens/applications/cubit/applications
 import 'package:graduation_project_admin/screens/login/cubit/login_cubit.dart';
 import 'package:graduation_project_admin/screens/sliders/cubit/sliders_cubit.dart';
 import 'package:graduation_project_admin/screens/universities/cubit/universities_cubit.dart';
+import 'package:graduation_project_admin/screens/university_applications/cubit/university_applications_cubit.dart';
 import 'package:graduation_project_admin/screens/users/cubit/users_cubit.dart';
 
 import 'firebase_options.dart';
@@ -37,6 +38,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => UsersCubit()),
         BlocProvider(create: (context) => SlidersCubit()),
         BlocProvider(create: (context) => ApplicationsCubit()),
+        BlocProvider(create: (context) => UniversityApplicationsCubit()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

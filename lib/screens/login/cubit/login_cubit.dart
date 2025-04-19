@@ -17,8 +17,6 @@ class LoginCubit extends Cubit<LoginState> {
   final auth = FirebaseAuth.instance;
   final firestore = FirebaseFirestore.instance;
 
-  bool isAdmin = false;
-
   Map<String, dynamic>? adminData;
   void loginAsAdmin(String email, String password) async {
     emit(LoadingLoginAdminState());
@@ -32,7 +30,6 @@ class LoginCubit extends Cubit<LoginState> {
             await firestore.collection("admins").doc(dataAuth.user?.uid).get();
         if (data.exists) {
           adminData = {"email": email, "id": dataAuth.user!.uid};
-          isAdmin = true;
 
           emit(SuccessLoginAdminState());
         } else {
@@ -63,7 +60,7 @@ class LoginCubit extends Cubit<LoginState> {
           Map<String, dynamic> jsonData = data.data() ?? {};
           jsonData["id"] = data.id;
           universityModel = UniversityModel.fromJson(jsonData);
-          isAdmin = false;
+
           emit(SuccessLoginUniversityState());
         } else {
           emit(ErrorLoginUniversityState());

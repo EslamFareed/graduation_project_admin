@@ -15,8 +15,7 @@ class DashboardScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-            "Welcome, ${LoginCubit.get(context).adminData?["email"] ?? LoginCubit.get(context).universityModel?.email ?? ""}"),
+        title: Text("Welcome, ${LoginCubit.get(context).adminData?["email"]}"),
       ),
       body: ListView(
         children: [
