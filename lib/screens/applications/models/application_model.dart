@@ -20,7 +20,7 @@ class StudentApplication {
   final UserModel user;
   final String certificatePhoto;
   final String status;
-  final DateTime interviewDate;
+  final String interviewDate;
   final String interviewDesc;
   final String id;
 
@@ -46,27 +46,26 @@ class StudentApplication {
     required this.id,
   });
 
-  factory StudentApplication.fromJson(Map<String, dynamic> json,String id) {
+  factory StudentApplication.fromJson(Map<String, dynamic> json, String id) {
     return StudentApplication(
-      date: DateTime.parse(json['date']),
-      motherPhone: json['motherPhone'],
-      fatherJob: json['fatherJob'],
-      university: UniversityModel.fromJson(json['university']),
-      motherName: json['motherName'],
-      idNumber: json['idNumber'],
-      type: json['type'],
-      highSchoolName: json['highSchoolName'],
-      motherJob: json['motherJob'],
-      major: Major.fromJson(json['major']),
-      highSchoolPercentage: json['highSchoolPercentage'],
-      fatherPhone: json['fatherPhone'],
-      idPhoto: json['idPhoto'],
-      user: UserModel.fromJson(json['user'], json['user']["uid"]),
-      certificatePhoto: json['certificatePhoto'],
-      status: json['status'],
-      interviewDesc: json['interviewDesc'],
-      interviewDate: DateTime.parse(json['interviewDate']),
-      id: id
-    );
+        date: DateTime.parse(json['date']),
+        motherPhone: json['motherPhone'],
+        fatherJob: json['fatherJob'],
+        university: UniversityModel.fromJson(json['university']),
+        motherName: json['motherName'],
+        idNumber: json['idNumber'],
+        type: json['type'],
+        highSchoolName: json['highSchoolName'],
+        motherJob: json['motherJob'],
+        major: Major.fromJson(json['major']),
+        highSchoolPercentage: json['highSchoolPercentage'],
+        fatherPhone: json['fatherPhone'],
+        idPhoto: json['idPhoto'],
+        user: UserModel.fromJson(json['user'], json['user']["uid"]),
+        certificatePhoto: json['certificatePhoto'],
+        status: json['status'],
+        interviewDesc: json['interviewDesc'],
+        interviewDate: json['interviewDate'],
+        id: id);
   }
 }

@@ -65,7 +65,7 @@ class UniversityApplicationsScreen extends StatelessWidget {
                                   ),
                                   if (item.status == "interview")
                                     Text(
-                                        "Interview Date : ${item.interviewDate.year}-${item.interviewDate.month}-${item.interviewDate.day}"),
+                                        "Interview Date : ${item.interviewDate}"),
                                   Text(
                                       "Application Date : ${item.date.year}-${item.date.month}-${item.date.day}"),
                                   Text("Major : ${item.major.name}"),
