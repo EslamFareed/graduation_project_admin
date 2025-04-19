@@ -1,0 +1,2 @@
+D:/projects/graduation_project_admin/android/app/.cxx/RelWithDebInfo/y5p866g7/armeabi-v7a/CMakeFiles/edit_cache.dir
+D:/projects/graduation_project_admin/android/app/.cxx/RelWithDebInfo/y5p866g7/armeabi-v7a/CMakeFiles/rebuild_cache.dir
