@@ -1,19 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:graduation_project_admin/core/utils/navigation_helper.dart';
-import 'package:graduation_project_admin/core/utils/show_snackbar.dart';
-import 'package:graduation_project_admin/screens/dashboard/dashboard_screen.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:graduation_project_admin/core/utils/app_functions.dart';
 import 'package:graduation_project_admin/screens/login/cubit/login_cubit.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+import '../../core/utils/app_colors.dart';
+import '../dashboard/dashboard_screen.dart';
 
-  @override
-  State<LoginScreen> createState() => _LoginScreenState();
-}
-
-class _LoginScreenState extends State<LoginScreen> {
-  bool visible = true;
+class LoginScreen extends StatelessWidget {
+  LoginScreen({super.key});
 
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
@@ -23,9 +18,6 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Login"),
-      ),
       body: Padding(
         padding: const EdgeInsets.all(20),
         child: SingleChildScrollView(
@@ -33,93 +25,138 @@ class _LoginScreenState extends State<LoginScreen> {
             key: globalKey,
             child: Column(
               children: [
-                SizedBox(height: 50),
+                SizedBox(height: context.screenHeight * .05),
+                SvgPicture.asset(
+                  "assets/icons/icon.svg",
+                  height: 100,
+                  width: 100,
+                ),
+                Text(
+                  "EduGate",
+                  style: TextStyle(
+                    fontSize: 30,
+                    fontWeight: FontWeight.bold,
+                    color: AppColors.primary,
+                  ),
+                ),
+                SizedBox(height: context.screenHeight * .05),
+
+                //! ------------------- Email ------------------!
+                Row(children: [Text("Email")]),
+                SizedBox(height: 5),
                 TextFormField(
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return "Email must be not empty";
-                    }
-                    return null;
-                  },
                   controller: emailController,
                   decoration: InputDecoration(
-                    labelText: "Email",
-                    prefixIcon: Icon(Icons.email),
+                    hintText: "",
+                    filled: true,
+                    fillColor: Colors.grey.shade200,
                     border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(16),
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide: BorderSide.none,
                     ),
                   ),
-                ),
-                SizedBox(height: 20),
-                TextFormField(
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return "Password must be not empty";
+                      return "Email is required";
+                    }
+                    if (!RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(value)) {
+                      return "Enter a valid email";
                     }
                     return null;
                   },
-                  controller: passwordController,
-                  obscureText: visible,
-                  decoration: InputDecoration(
-                    labelText: "Password",
-                    prefixIcon: Icon(Icons.security),
-                    suffixIcon: IconButton(
-                      onPressed: () {
-                        setState(() {
-                          visible = !visible;
-                        });
-                      },
-                      icon: Icon(
-                          visible ? Icons.visibility : Icons.visibility_off),
-                    ),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(16),
-                    ),
-                  ),
                 ),
-                SizedBox(height: 50),
-                SizedBox(
-                  width: double.infinity,
-                  child: ElevatedButton(
-                    onPressed: () {},
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.deepOrange,
-                    ),
-                    child: Text(
-                      "Login as University",
-                      style: TextStyle(color: Colors.white),
+                SizedBox(height: context.screenHeight * .05),
+
+                //! ------------------- Password ------------------!
+                Row(children: [Text("Password")]),
+                SizedBox(height: 5),
+                TextFormField(
+                  controller: passwordController,
+                  obscureText: true,
+                  decoration: InputDecoration(
+                    hintText: "",
+                    filled: true,
+                    fillColor: Colors.grey.shade200,
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide: BorderSide.none,
                     ),
                   ),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return "Password is required";
+                    }
+                    if (value.length < 6) {
+                      return "Password must be at least 6 characters";
+                    }
+                    return null;
+                  },
+                ),
+                SizedBox(height: context.screenHeight * .05),
+
+                BlocConsumer<LoginCubit, LoginState>(
+                  listener: (context, state) {
+                    if (state is ErrorLoginUniversityState) {
+                      context.showErrorSnack("Login Error, Please login again");
+                    } else if (state is SuccessLoginUniversityState) {
+                      context.showSuccessSnack("Login Success");
+                      context.goOffAll(DashboardScreen());
+                    }
+                  },
+                  builder: (context, state) {
+                    return state is LoadingLoginUniversityState
+                        ? Center(child: CircularProgressIndicator())
+                        : MaterialButton(
+                            onPressed: () {
+                              if (globalKey.currentState!.validate()) {
+                                LoginCubit.get(context).loginAsUniversity(
+                                  emailController.text,
+                                  passwordController.text,
+                                );
+                              }
+                            },
+                            minWidth: context.screenWidth,
+                            height: 50,
+                            color: AppColors.primary,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(4),
+                            ),
+                            child: Text(
+                              "Login as University",
+                              style: TextStyle(color: Colors.white),
+                            ),
+                          );
+                  },
                 ),
                 SizedBox(height: 20),
                 BlocConsumer<LoginCubit, LoginState>(
                   listener: (context, state) {
-                    if (state is ErrorLoginState) {
-                      context.showSnackBar(
-                          SnackType.error, "Login Error, Please login again");
-                    } else if (state is SuccessLoginState) {
-                      context.showSnackBar(SnackType.success, "Login Success");
-                      context.goOff(DashboardScreen());
+                    if (state is ErrorLoginAdminState) {
+                      context.showErrorSnack("Login Error, Please login again");
+                    } else if (state is SuccessLoginAdminState) {
+                      context.showSuccessSnack("Login Success");
+                      context.goOffAll(DashboardScreen());
                     }
                   },
                   builder: (context, state) {
-                    return state is LoadingLoginState
+                    return state is LoadingLoginAdminState
                         ? Center(child: CircularProgressIndicator())
-                        : SizedBox(
-                            width: double.infinity,
-                            child: ElevatedButton(
-                              onPressed: () {
-                                if (globalKey.currentState?.validate() ??
-                                    false) {
-                                  LoginCubit.get(context).login(
-                                      emailController.text,
-                                      passwordController.text);
-                                }
-                              },
-                              child: Text(
-                                "Login as Admin",
-                                style: TextStyle(color: Colors.white),
-                              ),
+                        : MaterialButton(
+                            onPressed: () {
+                              if (globalKey.currentState?.validate() ?? false) {
+                                LoginCubit.get(context).loginAsAdmin(
+                                    emailController.text,
+                                    passwordController.text);
+                              }
+                            },
+                            minWidth: context.screenWidth,
+                            height: 50,
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(4),
+                                side: BorderSide(color: AppColors.primary)),
+                            child: Text(
+                              "Login as Admin",
+                              style: TextStyle(color: AppColors.primary),
                             ),
                           );
                   },

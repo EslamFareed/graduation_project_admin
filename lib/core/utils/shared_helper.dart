@@ -7,9 +7,10 @@ class SharedHelper {
     prefs = await SharedPreferences.getInstance();
   }
 
-  static Future<void> loginAsAdmin(String email,String id) async {
+  static Future<void> loginAsAdmin(String email, String id) async {
     await prefs.setString("email", email);
     await prefs.setString("id", id);
+
     await prefs.setBool("isLogin", true);
   }
 

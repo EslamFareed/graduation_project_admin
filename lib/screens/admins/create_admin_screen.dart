@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:graduation_project_admin/core/utils/navigation_helper.dart';
-import 'package:graduation_project_admin/core/utils/show_snackbar.dart';
+import 'package:graduation_project_admin/core/utils/app_functions.dart';
 import 'package:graduation_project_admin/screens/admins/cubit/admins_cubit.dart';
 import 'package:graduation_project_admin/screens/dashboard/dashboard_screen.dart';
 
@@ -64,11 +63,9 @@ class CreateAdminScreen extends StatelessWidget {
                 BlocConsumer<AdminsCubit, AdminsState>(
                   listener: (context, state) {
                     if (state is ErrorAdminsState) {
-                      context.showSnackBar(
-                          SnackType.error, "Error, Please login again");
+                      context.showErrorSnack("Error, Please login again");
                     } else if (state is SuccessAdminsState) {
-                      context.showSnackBar(
-                          SnackType.success, "Created Successfully");
+                      context.showSuccessSnack("Created Successfully");
                       context.goOffAll(DashboardScreen());
                     }
                   },

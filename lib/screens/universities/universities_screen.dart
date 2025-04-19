@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:graduation_project_admin/core/utils/navigation_helper.dart';
-import 'package:graduation_project_admin/screens/universities/create_university_screen.dart';
+import 'package:graduation_project_admin/core/utils/app_functions.dart';
 import 'package:graduation_project_admin/screens/universities/cubit/universities_cubit.dart';
+import 'package:graduation_project_admin/screens/universities/university_details_screen.dart';
+
+import 'create_university_screen.dart';
 
 class UniversitiesScreen extends StatelessWidget {
   const UniversitiesScreen({super.key});
@@ -16,7 +18,7 @@ class UniversitiesScreen extends StatelessWidget {
         actions: [
           IconButton(
             onPressed: () {
-              context.goTo(CreateUniversityScreen());
+              context.goToPage(CreateUniversityScreen());
             },
             icon: Icon(Icons.add),
           ),
@@ -31,23 +33,41 @@ class UniversitiesScreen extends StatelessWidget {
                     final item =
                         UniversitiesCubit.get(context).universities[index];
                     return Card(
-                      child: ListTile(
-                        leading: Image.network(
-                          item.image!,
-                          width: 50,
-                          height: 50,
-                          fit: BoxFit.cover,
-                        ),
-                        title: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(item.name ?? ""),
-                            Text(item.email ?? ""),
-                            Text(item.phone ?? ""),
-                            Text(item.address ?? ""),
-                            Text(item.desc ?? ""),
-                          ],
-                        ),
+                      child: Row(
+                        spacing: 20,
+                        children: [
+                          Image.network(
+                            item.image,
+                            width: context.screenWidth * .3,
+                            height: 150,
+                            fit: BoxFit.cover,
+                          ),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  item.name,
+                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                ),
+                                Text(item.email),
+                                Text(item.phone),
+                                Text(item.address),
+                              ],
+                            ),
+                          ),
+                          IconButton(
+                            onPressed: () {
+                              context.goToPage(
+                                UniversityDetailsScreen(item: item),
+                              );
+                            },
+                            icon: Icon(
+                              Icons.arrow_forward_ios,
+                              size: 15,
+                            ),
+                          )
+                        ],
                       ),
                     );
                   },

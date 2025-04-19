@@ -10,3 +10,13 @@ class LoadingUniversitiesState extends UniversitiesState {}
 class SuccessUniversitiesState extends UniversitiesState {}
 
 class ErrorUniversitiesState extends UniversitiesState {}
+
+class LoadingImageState extends UniversitiesState {}
+
+class SuccessImageState extends UniversitiesState {}
+
+class ErrorImageState extends UniversitiesState {}
+
+
+class LoadingAddNewMajorState extends UniversitiesState{}
+class SuccessAddNewMajorState extends UniversitiesState{}

@@ -1,34 +1,43 @@
 import 'package:flutter/material.dart';
-import 'package:graduation_project_admin/core/utils/navigation_helper.dart';
-import 'package:graduation_project_admin/core/utils/shared_helper.dart';
-import 'package:graduation_project_admin/screens/dashboard/dashboard_screen.dart';
-import 'package:graduation_project_admin/screens/login/login_screen.dart';
+import 'package:graduation_project_admin/core/utils/app_colors.dart';
+import 'package:graduation_project_admin/core/utils/app_functions.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
-class SplashScreen extends StatefulWidget {
+import '../login/login_screen.dart';
+
+class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
 
   @override
-  State<SplashScreen> createState() => _SplashScreenState();
-}
-
-class _SplashScreenState extends State<SplashScreen> {
-  @override
-  void initState() {
-    Future.delayed(Duration(seconds: 2), () {
-      if (SharedHelper.isLogin()) {
-        context.goOff(DashboardScreen());
-      } else {
-        context.goOff(LoginScreen());
+  Widget build(BuildContext context) {
+    Future.delayed(const Duration(seconds: 3), () {
+      if (context.mounted) {
+        context.goOffAll(LoginScreen());
       }
     });
-    super.initState();
-  }
 
-  @override
-  Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColors.primary,
       body: Center(
-        child: CircularProgressIndicator(),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            SvgPicture.asset(
+              "assets/icons/icon.svg",
+              height: 100,
+              width: 100,
+              colorFilter: ColorFilter.mode(Colors.white, BlendMode.srcIn),
+            ),
+            Text(
+              "EduGate ADMIN",
+              style: TextStyle(
+                fontSize: 30,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

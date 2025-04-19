@@ -1,49 +1,61 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'major_model.dart';
 
 class UniversityModel {
-  String? image;
-  String? password;
-  String? address;
-  List<String>? majors;
-  String? phone;
-  String? name;
-  String? email;
-  String? desc;
-  String? id;
+  final String image;
+  final String requirements;
+  final String password;
+  final List<Major> majors;
+  final String address;
+  final String phone;
+  final String name;
+  final String email;
+  final String desc;
+  String id;
+  // bool isFavorite;
 
-  UniversityModel(
-      {this.image,
-      this.password,
-      this.address,
-      this.majors,
-      this.phone,
-      this.name,
-      this.email,
-      this.id,
-      this.desc});
+  UniversityModel({
+    required this.image,
+    required this.requirements,
+    required this.password,
+    required this.majors,
+    required this.address,
+    required this.phone,
+    required this.name,
+    required this.email,
+    required this.desc,
+    required this.id,
+    // this.isFavorite = false,
+  });
 
-  UniversityModel.fromFirbase(QueryDocumentSnapshot<Map<String, dynamic>> json) {
-    id = json.id;
-    image = json.data()['image'];
-    password = json.data()['password'];
-    address = json.data()['address'];
-    majors = json.data()['majors'].cast<String>();
-    phone = json.data()['phone'];
-    name = json.data()['name'];
-    email = json.data()['email'];
-    desc = json.data()['desc'];
+  factory UniversityModel.fromJson(Map<String, dynamic> json) {
+    return UniversityModel(
+      image: json['image'],
+      requirements: json['requirements'],
+      password: json['password'],
+      majors: (json['majors'] as List)
+          .map((majorJson) => Major.fromJson(majorJson))
+          .toList(),
+      address: json['address'],
+      phone: json['phone'],
+      name: json['name'],
+      email: json['email'],
+      desc: json['desc'],
+      id: json['id'],
+      // isFavorite: CacheHelper.isFavorite(json["id"]),
+    );
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['image'] = this.image;
-    data['password'] = this.password;
-    data['address'] = this.address;
-    data['majors'] = this.majors;
-    data['phone'] = this.phone;
-    data['name'] = this.name;
-    data['email'] = this.email;
-    data['desc'] = this.desc;
-    return data;
+    return {
+      'image': image,
+      'requirements': requirements,
+      'password': password,
+      'majors': majors.map((m) => m.toJson()).toList(),
+      'address': address,
+      'phone': phone,
+      'name': name,
+      'email': email,
+      'desc': desc,
+    };
   }
 }

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:graduation_project_admin/core/utils/navigation_helper.dart';
-import 'package:graduation_project_admin/screens/admins/create_admin_screen.dart';
+import 'package:graduation_project_admin/core/utils/app_functions.dart';
 import 'package:graduation_project_admin/screens/admins/cubit/admins_cubit.dart';
+
+import 'create_admin_screen.dart';
 
 class AdminsScreen extends StatelessWidget {
   const AdminsScreen({super.key});
@@ -16,7 +17,7 @@ class AdminsScreen extends StatelessWidget {
         actions: [
           IconButton(
             onPressed: () {
-              context.goTo(CreateAdminScreen());
+              context.goToPage(CreateAdminScreen());
             },
             icon: Icon(Icons.add),
           )
