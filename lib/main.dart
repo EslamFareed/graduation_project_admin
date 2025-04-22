@@ -4,6 +4,7 @@ import 'package:graduation_project_admin/core/utils/app_colors.dart';
 import 'package:graduation_project_admin/core/utils/shared_helper.dart';
 import 'package:graduation_project_admin/screens/admins/cubit/admins_cubit.dart';
 import 'package:graduation_project_admin/screens/applications/cubit/applications_cubit.dart';
+import 'package:graduation_project_admin/screens/asks/cubit/asks_cubit.dart';
 import 'package:graduation_project_admin/screens/login/cubit/login_cubit.dart';
 import 'package:graduation_project_admin/screens/sliders/cubit/sliders_cubit.dart';
 import 'package:graduation_project_admin/screens/universities/cubit/universities_cubit.dart';
@@ -39,6 +40,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => SlidersCubit()),
         BlocProvider(create: (context) => ApplicationsCubit()),
         BlocProvider(create: (context) => UniversityApplicationsCubit()),
+        BlocProvider(create: (context) => AsksCubit()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

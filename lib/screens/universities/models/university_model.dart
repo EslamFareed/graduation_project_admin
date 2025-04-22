@@ -10,7 +10,9 @@ class UniversityModel {
   final String name;
   final String email;
   final String desc;
-  String id;
+  final String id;
+  final String website;
+  bool isAds;
   // bool isFavorite;
 
   UniversityModel({
@@ -24,6 +26,8 @@ class UniversityModel {
     required this.email,
     required this.desc,
     required this.id,
+    required this.website,
+    required this.isAds,
     // this.isFavorite = false,
   });
 
@@ -41,6 +45,8 @@ class UniversityModel {
       email: json['email'],
       desc: json['desc'],
       id: json['id'],
+      website: json['website'],
+      isAds: json['isAds'] ?? false,
       // isFavorite: CacheHelper.isFavorite(json["id"]),
     );
   }
@@ -56,6 +62,9 @@ class UniversityModel {
       'name': name,
       'email': email,
       'desc': desc,
+      'id': id,
+      'website': website,
+      'isAds': isAds,
     };
   }
 }

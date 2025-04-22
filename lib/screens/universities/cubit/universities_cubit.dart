@@ -93,4 +93,14 @@ class UniversitiesCubit extends Cubit<UniversitiesState> {
       emit(ErrorImageState());
     }
   }
+
+  void makeAds(bool val, String id) async {
+    emit(LoadingUniversitiesState());
+    try {
+      await firestore.collection("universities").doc(id).update({"isAds": val});
+      emit(SuccessUniversitiesState());
+    } catch (e) {
+      emit(ErrorUniversitiesState());
+    }
+  }
 }

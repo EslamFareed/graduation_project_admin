@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:graduation_project_admin/core/utils/app_functions.dart';
 import 'package:graduation_project_admin/screens/applications/applications_screen.dart';
+import 'package:graduation_project_admin/screens/asks/asks_screen.dart';
 import 'package:graduation_project_admin/screens/login/cubit/login_cubit.dart';
 import 'package:graduation_project_admin/screens/sliders/sliders_screen.dart';
 import 'package:graduation_project_admin/screens/users/users_screen.dart';
@@ -48,10 +49,10 @@ class DashboardScreen extends StatelessWidget {
           Card(
             child: ListTile(
               onTap: () {
-                context.goToPage(SlidersScreen());
+                context.goToPage(AsksScreen());
               },
-              title: Text("Sliders ADS"),
-              leading: Icon(Icons.image),
+              title: Text("ASKS"),
+              leading: Icon(Icons.question_mark),
               trailing: Icon(
                 Icons.arrow_forward_ios,
                 size: 15,

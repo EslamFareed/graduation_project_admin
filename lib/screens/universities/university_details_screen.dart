@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:graduation_project_admin/core/utils/app_functions.dart';
+import 'package:graduation_project_admin/screens/universities/cubit/universities_cubit.dart';
 
 import '../../core/utils/app_colors.dart';
 import 'models/university_model.dart';
@@ -71,6 +73,12 @@ class UniversityDetailsScreen extends StatelessWidget {
                       title: Text(item.address, style: TextStyle(fontSize: 16)),
                     ),
                   ),
+                  Card(
+                    child: ListTile(
+                      leading: Icon(Icons.link),
+                      title: Text(item.website, style: TextStyle(fontSize: 16)),
+                    ),
+                  ),
                   Text("Requirements"),
                   Text(item.requirements, style: TextStyle(fontSize: 16)),
                   Divider(),
@@ -97,6 +105,24 @@ class UniversityDetailsScreen extends StatelessWidget {
                     ),
                   ),
                   Text(item.desc, style: TextStyle(fontSize: 16)),
+                  BlocBuilder<UniversitiesCubit, UniversitiesState>(
+                    builder: (context, state) {
+                      return Card(
+                        child: SwitchListTile(
+                          value: item.isAds,
+                          title: Text("Make this university an ad"),
+                          onChanged: (value) {
+                            UniversitiesCubit.get(context)
+                                .makeAds(value, item.id);
+                            // Handle the switch change
+                            item.isAds = value;
+                            // You can also call a function to update the state in your app
+                          },
+                          activeColor: AppColors.primary,
+                        ),
+                      );
+                    },
+                  ),
                 ],
               ),
             ),

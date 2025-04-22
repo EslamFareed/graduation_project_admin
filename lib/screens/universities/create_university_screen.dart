@@ -16,6 +16,7 @@ class CreateUniversityScreen extends StatelessWidget {
   final descController = TextEditingController();
   final phoneController = TextEditingController();
   final addressController = TextEditingController();
+  final websiteController = TextEditingController();
   final requirementsController = TextEditingController();
   String? gender;
 
@@ -212,6 +213,30 @@ class CreateUniversityScreen extends StatelessWidget {
                 ),
                 SizedBox(height: 15),
 
+                //! ------------------- Website ------------------!
+                Row(children: [Text("Website")]),
+                SizedBox(height: 5),
+                TextFormField(
+                  controller: websiteController,
+                  decoration: InputDecoration(
+                    hintText: "",
+                    filled: true,
+                    fillColor: Colors.grey.shade200,
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide: BorderSide.none,
+                    ),
+                  ),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return "Website is required";
+                    }
+
+                    return null;
+                  },
+                ),
+                SizedBox(height: 15),
+
                 // //! ------------------- image ------------------!
                 Row(children: [Text("Image")]),
                 SizedBox(height: 5),
@@ -304,6 +329,8 @@ class CreateUniversityScreen extends StatelessWidget {
                                       null) {
                                 UniversitiesCubit.get(context).createUniversity(
                                     UniversityModel(
+                                        isAds: false,
+                                        website: websiteController.text,
                                         image: UniversitiesCubit.get(context)
                                                 .imageLink ??
                                             "",
@@ -468,6 +495,4 @@ class CreateUniversityScreen extends StatelessWidget {
       },
     );
   }
-
-
 }
