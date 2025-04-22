@@ -10,7 +10,7 @@ class UniversityModel {
   final String name;
   final String email;
   final String desc;
-  final String id;
+  String id;
   final String website;
   bool isAds;
   // bool isFavorite;
@@ -62,7 +62,7 @@ class UniversityModel {
       'name': name,
       'email': email,
       'desc': desc,
-      'id': id,
+      // 'id': id,
       'website': website,
       'isAds': isAds,
     };
