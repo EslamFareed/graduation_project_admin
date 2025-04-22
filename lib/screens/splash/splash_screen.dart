@@ -17,23 +17,28 @@ class SplashScreen extends StatelessWidget {
     });
 
     return Scaffold(
-      backgroundColor: AppColors.primary,
+      backgroundColor: Colors.white,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            SvgPicture.asset(
-              "assets/icons/icon.svg",
+            Image.asset(
+              "assets/icons/icon.png",
               height: 100,
               width: 100,
-              colorFilter: ColorFilter.mode(Colors.white, BlendMode.srcIn),
             ),
+            // SvgPicture.asset(
+            // "assets/icons/icon.svg",
+            // height: 100,
+            // width: 100,
+            //   colorFilter: ColorFilter.mode(Colors.white, BlendMode.srcIn),
+            // ),
             Text(
               "EduGate ADMIN",
               style: TextStyle(
                 fontSize: 30,
                 fontWeight: FontWeight.bold,
-                color: Colors.white,
+                color: AppColors.primary,
               ),
             ),
           ],

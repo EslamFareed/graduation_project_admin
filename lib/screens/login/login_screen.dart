@@ -27,8 +27,8 @@ class LoginScreen extends StatelessWidget {
             child: Column(
               children: [
                 SizedBox(height: context.screenHeight * .05),
-                SvgPicture.asset(
-                  "assets/icons/icon.svg",
+                Image.asset(
+                  "assets/icons/icon.png",
                   height: 100,
                   width: 100,
                 ),
