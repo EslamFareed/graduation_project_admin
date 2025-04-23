@@ -3,7 +3,6 @@ import 'package:graduation_project_admin/core/utils/app_functions.dart';
 import 'package:graduation_project_admin/screens/applications/applications_screen.dart';
 import 'package:graduation_project_admin/screens/asks/asks_screen.dart';
 import 'package:graduation_project_admin/screens/login/cubit/login_cubit.dart';
-import 'package:graduation_project_admin/screens/sliders/sliders_screen.dart';
 import 'package:graduation_project_admin/screens/users/users_screen.dart';
 
 import '../admins/admins_screen.dart';
