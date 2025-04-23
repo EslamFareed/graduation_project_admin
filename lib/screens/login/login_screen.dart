@@ -29,8 +29,8 @@ class LoginScreen extends StatelessWidget {
                 SizedBox(height: context.screenHeight * .05),
                 Image.asset(
                   "assets/icons/icon.png",
-                  height: 100,
-                  width: 100,
+                  height: 200,
+                  width: 200,
                 ),
                 Text(
                   "EduGate",

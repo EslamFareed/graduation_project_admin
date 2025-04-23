@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:graduation_project_admin/core/utils/app_colors.dart';
 import 'package:graduation_project_admin/core/utils/app_functions.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 import '../login/login_screen.dart';
 
@@ -17,28 +16,23 @@ class SplashScreen extends StatelessWidget {
     });
 
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: AppColors.primary,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Image.asset(
               "assets/icons/icon.png",
-              height: 100,
-              width: 100,
+              height: 200,
+              width: 200,
+              color: Colors.white,
             ),
-            // SvgPicture.asset(
-            // "assets/icons/icon.svg",
-            // height: 100,
-            // width: 100,
-            //   colorFilter: ColorFilter.mode(Colors.white, BlendMode.srcIn),
-            // ),
             Text(
               "EduGate ADMIN",
               style: TextStyle(
                 fontSize: 30,
                 fontWeight: FontWeight.bold,
-                color: AppColors.primary,
+                color: Colors.white,
               ),
             ),
           ],
