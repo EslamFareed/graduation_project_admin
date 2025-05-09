@@ -310,6 +310,7 @@ class CreateUniversityScreen extends StatelessWidget {
                   listener: (context, state) {
                     if (state is SuccessUniversitiesState) {
                       context.showSuccessSnack("University added successfully");
+                      Navigator.pop(context);
                     } else if (state is ErrorUniversitiesState) {
                       context.showErrorSnack(
                         "University add Error, Please try again",

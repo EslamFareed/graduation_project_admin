@@ -57,10 +57,12 @@ class UniversitiesScreen extends StatelessWidget {
                             ),
                           ),
                           IconButton(
-                            onPressed: () {
-                              context.goToPage(
+                            onPressed: () async{
+                            await  context.goToPage(
                                 UniversityDetailsScreen(item: item),
                               );
+
+                              
                             },
                             icon: Icon(
                               Icons.arrow_forward_ios,

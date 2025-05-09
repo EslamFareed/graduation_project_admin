@@ -57,10 +57,11 @@ class UniversityDetailsScreen extends StatelessWidget {
         title: Text(item.name),
         actions: [
           IconButton(
-            onPressed: () {
-              context.goToPage(EditUniversityScreen(
+            onPressed: () async {
+              await context.goToPage(EditUniversityScreen(
                 university: item,
               ));
+              Navigator.pop(context);
             },
             icon: Icon(Icons.edit),
           ),
