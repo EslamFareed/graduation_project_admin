@@ -13,3 +13,13 @@ class Major {
     return {'score': score, 'fees': fees, 'name': name};
   }
 }
+
+extension MajorCopy on Major {
+  Major copyWith({String? name, String? score, String? fees}) {
+    return Major(
+      name: name ?? this.name,
+      score: score ?? this.score,
+      fees: fees ?? this.fees,
+    );
+  }
+}

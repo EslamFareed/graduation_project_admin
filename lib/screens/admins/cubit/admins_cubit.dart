@@ -48,4 +48,20 @@ class AdminsCubit extends Cubit<AdminsState> {
       emit(ErrorAdminsState());
     }
   }
+
+  void deleteAdmin(AdminModel admin) async {
+    emit(LoadingAdminsState());
+    try {
+      await auth.signInWithEmailAndPassword(
+          email: admin.email!, password: admin.password!);
+
+      await auth.currentUser?.delete();
+
+      await firestore.collection("admins").doc(admin.id).delete();
+
+      getAdmins();
+    } catch (e) {
+      emit(ErrorAdminsState());
+    }
+  }
 }

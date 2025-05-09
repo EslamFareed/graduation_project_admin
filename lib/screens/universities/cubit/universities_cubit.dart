@@ -70,6 +70,36 @@ class UniversitiesCubit extends Cubit<UniversitiesState> {
     }
   }
 
+  void editUniversity(UniversityModel item) async {
+    emit(LoadingUniversitiesState());
+    try {
+      await firestore
+          .collection("universities")
+          .doc(item.id)
+          .update(item.toJson());
+
+      emit(SuccessUniversitiesState());
+    } catch (e) {
+      emit(ErrorUniversitiesState());
+    }
+  }
+
+  void deleteUniversity(UniversityModel item) async {
+    emit(LoadingUniversitiesState());
+    try {
+      await auth.signInWithEmailAndPassword(
+          email: item.email, password: item.password);
+
+      await auth.currentUser?.delete();
+
+      await firestore.collection("universities").doc(item.id).delete();
+
+      emit(SuccessUniversitiesState());
+    } catch (e) {
+      emit(ErrorUniversitiesState());
+    }
+  }
+
   String? imageLink;
 
   void selectImage() async {

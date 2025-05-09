@@ -29,7 +29,11 @@ class LoginCubit extends Cubit<LoginState> {
         var data =
             await firestore.collection("admins").doc(dataAuth.user?.uid).get();
         if (data.exists) {
-          adminData = {"email": email, "id": dataAuth.user!.uid};
+          adminData = {
+            "email": email,
+            "id": dataAuth.user!.uid,
+            "pass": password
+          };
 
           emit(SuccessLoginAdminState());
         } else {

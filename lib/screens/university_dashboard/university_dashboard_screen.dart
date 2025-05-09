@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:graduation_project_admin/core/utils/app_functions.dart';
 import 'package:graduation_project_admin/screens/login/cubit/login_cubit.dart';
-import 'package:graduation_project_admin/screens/universities/university_details_screen.dart';
 import 'package:graduation_project_admin/screens/university_applications/university_applications_screen.dart';
+import 'package:graduation_project_admin/screens/university_dashboard/university_profile_screen.dart';
 
 class UniversityDashboardScreen extends StatelessWidget {
   const UniversityDashboardScreen({super.key});
@@ -19,7 +19,7 @@ class UniversityDashboardScreen extends StatelessWidget {
           Card(
             child: ListTile(
               onTap: () {
-                context.goToPage(UniversityDetailsScreen(
+                context.goToPage(UniversityProfileScreen(
                     item: LoginCubit.get(context).universityModel!));
               },
               title: Text("University Profile"),
